@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+		<meta charset="ISO-8859-1">
+		<title>Noticia</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+				integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand" th:href="@{/categorias}"> Categorias <img
+				src="https://w7.pngwing.com/pngs/894/405/png-transparent-bookmark-computer-icons-category-folders-angle-text-rectangle.png"
+				width="30" height="30" class="d-inline-block align-top" alt="">
+			</a> <a class="navbar-brand" th:href="@{/news}"> Noticias <img
+				src="https://e7.pngegg.com/pngimages/422/126/png-clipart-newspaper-computer-icons-symbol-news-icon-text-logo.png"
+				width="30" height="30" class="d-inline-block align-top" alt="">
+			</a>
+		</nav>
+		<br>
+		<h2 class="text-center">Listado de noticias</h2>
+		<br>
+		<br>
+		<a th:href="@{/news/form}" class="btn btn-success"
+			style="background-color: #343a40; border: none">Nueva noticia</a>
+		<br>
+		<br>
+		<table class="table table-sm table-bordered "
+			Style="text-align: center">
+			<thead>
+				<td>Id</td>
+				<td>Titulo</td>
+				<td>Desarrollo</td>
+				<td>Fecha</td>
+				<td>Categoria</td>
+				<td>URL</td>
+				<td>Resumen</td>
+				<td>Acciones</td>
+			</thead>
+			<tbody>
+				<tr th:each="noticia: ${news}">
+					<td th:text="${noticia.id}"></td>
+					<td th:text="${noticia.titulo}"></td>
+					<td th:text="${noticia.desarrollo}"></td>
+					<td th:text="${noticia.fecha}"></td>
+					<td th:text="${noticia.categoria.id}"></td>
+					<td th:text="${noticia.url}"></td>
+					<td th:text="${noticia.resumen}"></td>
+					<td>
+						<a th:href="@{/news/form(id=${noticia.id})}">Editar</a>
+						<a th:href="@{/news/borrar/{id}(id=${noticia.id})}">Eliminar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+</body>
+</html>
