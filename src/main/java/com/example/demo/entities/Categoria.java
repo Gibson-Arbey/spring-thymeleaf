@@ -3,6 +3,8 @@ package com.example.demo.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +31,7 @@ public class Categoria {
 	
 	private String descripcion;
 	
-	 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
 	private List<News> news = new ArrayList<>();
 }

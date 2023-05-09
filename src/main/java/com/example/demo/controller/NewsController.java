@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entities.Categoria;
 import com.example.demo.entities.News;
+import com.example.demo.repositories.CategoriaRepository;
 import com.example.demo.repositories.NewsRepository;
 
 import jakarta.validation.Valid;
@@ -26,15 +27,21 @@ public class NewsController {
 	@Autowired
 	private NewsRepository newsRepository;
 	
+	@Autowired
+    private CategoriaRepository categoriaRepository;
+	
 	@GetMapping
     public String listarNews(Model model) {
         List<News> news = newsRepository.findAll();
+        
         model.addAttribute("news", news);
         return "noticia";
     }
 	
 	@GetMapping("/form")
-    public String mostrar(@RequestParam(value = "id", required = false) Integer id, News noticia) {
+    public String mostrar(@RequestParam(value = "id", required = false) Integer id, News noticia, Model model) {
+		List<Categoria> categorias = categoriaRepository.findAll();
+		model.addAttribute("categorias", categorias);
         return "nueva";
     }
 	
@@ -70,4 +77,6 @@ public class NewsController {
         newsRepository.delete(noticia);
         return "redirect:/news";
     }
+	
+
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="utf-8">
 	<title>Noticia</title>
 	<link rel="stylesheet"
 		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -29,14 +29,41 @@
          	
          	<label for="titulo" class="col-sm-2 col-form-label" >Titulo:</label>
 	        <div class="col-sm-10">
-	            <input class="form-control" type="text" name="titulo" th:field="*{titulo}" th:value="${news.titulo}"required />
-            	 
+	            <input class="form-control" type="text" name="titulo" th:field="*{titulo}" th:value="${news.titulo}"required />	 
             </div>
-        	
-	        <label for="descripcion" class="col-sm-2 col-form-label" >Desarrollo:</label>
+        	<br>
+        	<br>
+	        <label for="desarrollo" class="col-sm-2 col-form-label" >Desarrollo:</label>
 	        <div class="col-sm-10">
-	            <input class="form-control" type="text" name="desarrollo" th:field="*{desarrollo}" th:value="${news.desarrollo}" />
-            	 
+	            <input class="form-control" type="text" name="desarrollo" th:field="*{desarrollo}" th:value="${news.desarrollo}" /> 
+            </div>
+            <br>
+            <br>
+            <label for="fecha" class="col-sm-2 col-form-label" >Fecha:</label>
+	        <div class="col-sm-10">
+	            <input class="form-control" type="date" name="fecha" th:field="*{fecha}" th:value="${news.fecha}" /> 
+            </div>
+            <br>
+            <br>
+            <label for="categoria" class="col-sm-2 col-form-label" >Categoria:</label>
+	        <div class="col-sm-10">
+	             <select name="categoria" th:field="*{categoria.id}" required >
+					<option value="">Seleccione una categoría</option>
+					<option th:each="cat : ${categorias}"
+						th:value="${cat.id}" th:text="${cat.descripcion}"></option>
+				</select>
+			</div>
+            <br>
+            <br>
+            <label for="url" class="col-sm-2 col-form-label" >Url:</label>
+	        <div class="col-sm-10">
+	            <input class="form-control" pattern="^(https?://)?[\w.-]+\.[a-zA-Z]{2,}$" type="text" name="url" th:field="*{url}" th:value="${news.url}" /> 
+            </div>
+       		<br>
+       		<br>
+       		<label for="resumen" class="col-sm-2 col-form-label" >Resumen:</label>
+	        <div class="col-sm-10">
+	            <input class="form-control" type="text" name="url" th:field="*{resumen}" th:value="${news.resumen}" /> 
             </div>
         </div>
 
@@ -45,6 +72,8 @@
 				<button type="submit"  th:text="${news.id == null ? 'Agregar' : 'Actualizar'}"
         		class="btn btn-success" style="background-color:#343a40; border:none">Guardar</button>
 			</div>
+			
+			
 		</div>
 		
     </form>
