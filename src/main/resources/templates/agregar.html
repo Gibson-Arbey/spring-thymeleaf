@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Categoría</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/categorias}">
+			Categorias <img
+			src="https://w7.pngwing.com/pngs/894/405/png-transparent-bookmark-computer-icons-category-folders-angle-text-rectangle.png"
+			width="30" height="30" class="d-inline-block align-top" alt="">
+		</a>
+	</nav>
+	<br>
+    <h1 th:if="${categoria.id == null}" class="h1" style="text-align: center;">Crear categoría</h1>
+    <h1 th:if="${categoria.id != null}" class="h1" style="text-align: center;">Actualizar categoría</h1>
+
+    <form method="post" th:action="@{/categorias/agregar}" th:object="${categoria}">
+   
+        <div class="form-group row">
+         	<input type="hidden" name="id"  th:if="${categoria.id != null}" th:field="*{id}" />
+        	
+	        <label for="descripcion" class="col-sm-2 col-form-label" >Descripción:</label>
+	        <div class="col-sm-10">
+	            <input class="form-control" type="text" name="descripcion" th:field="*{descripcion}" th:value="${categoria.id}"required />
+            	 
+            </div>
+        </div>
+
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<button type="submit"  th:text="${categoria.id == null ? 'Agregar' : 'Actualizar'}"
+        		class="btn btn-success" style="background-color:#343a40; border:none">Guardar</button>
+			</div>
+		</div>
+		
+    </form>
+</body>
+</html>
