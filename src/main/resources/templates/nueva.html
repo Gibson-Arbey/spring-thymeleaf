@@ -47,6 +47,7 @@
             <br>
             <label for="categoria" class="col-sm-2 col-form-label" >Categoria:</label>
 	        <div class="col-sm-10">
+
 	             <select name="categoria" th:field="*{categoria.id}" required >
 					<option value="">Seleccione una categoría</option>
 					<option th:each="cat : ${categorias}"
@@ -57,13 +58,13 @@
             <br>
             <label for="url" class="col-sm-2 col-form-label" >Url:</label>
 	        <div class="col-sm-10">
-	            <input class="form-control" pattern="^(https?://)?[\w.-]+\.[a-zA-Z]{2,}$" type="text" name="url" th:field="*{url}" th:value="${news.url}" /> 
+	            <input class="form-control" pattern="^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$" type="text" name="url" th:field="*{url}" th:value="${news.url}" /> 
             </div>
        		<br>
        		<br>
        		<label for="resumen" class="col-sm-2 col-form-label" >Resumen:</label>
 	        <div class="col-sm-10">
-	            <input class="form-control" type="text" name="url" th:field="*{resumen}" th:value="${news.resumen}" /> 
+	            <input class="form-control" type="text" name="resumen" th:field="*{resumen}" th:value="${news.resumen}" /> 
             </div>
         </div>
 

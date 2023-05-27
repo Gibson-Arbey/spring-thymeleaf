@@ -35,8 +35,14 @@ public class CategoriaViewController {
     
 	
 	@GetMapping("/form")
-    public String mostrar(@RequestParam(value = "id", required = false) Integer id,Categoria categoria) {
-        return "agregar";
+    public String mostrar(@RequestParam(value = "id", required = false) Integer id, Model model) {
+        Categoria categoria = new Categoria();
+        if(id != null) {
+			categoria = categoriaRepository.findById(id).get();
+		}
+		
+		model.addAttribute("categoria", categoria);
+		return "agregar";
     }
 
 	
@@ -51,10 +57,11 @@ public class CategoriaViewController {
 	}
 	
 	@GetMapping("/editar")
-	public String actualizarCategoria(@RequestParam("id") int id, @ModelAttribute("categoria") Categoria categoriaActualizada, BindingResult result) {
+	public String actualizarCategoria(@RequestParam("id") int id, @ModelAttribute("categoria") Categoria categoriaActualizada,
+			BindingResult result) {
 		Categoria categoria = categoriaRepository.findById(id)
              .orElseThrow(() -> new IllegalArgumentException("Categoria no encontrada con id: " + id));
-        categoria.setDescripcion(categoriaActualizada.getDescripcion());
+		categoria.setDescripcion(categoriaActualizada.getDescripcion());
         categoriaRepository.save(categoria);
 	    return "redirect:/categorias"; 
 	}

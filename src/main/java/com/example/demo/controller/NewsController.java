@@ -39,9 +39,15 @@ public class NewsController {
     }
 	
 	@GetMapping("/form")
-    public String mostrar(@RequestParam(value = "id", required = false) Integer id, News noticia, Model model) {
+    public String mostrar(@RequestParam(value = "id", required = false) Integer id, Model model) {
+		News news = new News();
+		
+		if(id != null) {
+			news = newsRepository.findById(id).get();
+		}
 		List<Categoria> categorias = categoriaRepository.findAll();
 		model.addAttribute("categorias", categorias);
+		model.addAttribute("news", news);
         return "nueva";
     }
 	

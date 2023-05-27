@@ -27,7 +27,7 @@
         	
 	        <label for="descripcion" class="col-sm-2 col-form-label" >Descripción:</label>
 	        <div class="col-sm-10">
-	            <input class="form-control" type="text" name="descripcion" th:field="*{descripcion}" th:value="${categoria.id}"required />
+	            <input class="form-control" type="text" name="descripcion" th:field="*{descripcion}" th:value="${categoriaExistente != null ? categoriaExistente.descripcion : ''}" required />
             	 
             </div>
         </div>
